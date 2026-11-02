@@ -1,0 +1,8 @@
+{
+  "name": "HunHax TV",
+  "description": "HunHax tarafından hazırlanan Türkçe CloudStream eklenti deposu. Film, dizi, anime ve daha fazlası için yasal kaynaklar.",
+  "manifestVersion": 1,
+  "pluginLists": [
+    "https://raw.githubusercontent.com/hunhax44/hunhax-tv/builds/plugins.json"
+  ]
+}
