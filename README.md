@@ -1,64 +1,58 @@
-# 🇹🇷 HunHax TV — CloudStream Repository
+**⚠️ This is currently under development, dont use it yet if you're not comfortable with constantly merging new changes**
 
-HunHax TV, CloudStream için Türkçe açıklamalara sahip, Android telefon ve Android TV odaklı bir eklenti deposu projesidir.
+# `Cloudstream3 Plugin Repo Template`
 
-## Kategoriler için yol haritası
+Template for a [Cloudstream3](https://github.com/recloudstream) plugin repo
 
-- Film
-- Dizi
-- Anime
-- Belgesel
-- Çizgi film
-- Herkese açık canlı yayınlar
+**⚠️ Make sure you check "Include all branches" when using this template**
 
-> Bu depo başlangıç iskeletidir. Henüz yayımlanmış/kurulabilir bir içerik eklentisi içermez.
-> `plugins.json`, ilk eklenti derlenene kadar boş bir listedir. Yalnızca yayınlama ve dağıtma
-> hakkımız olan kaynaklar kullanılmalıdır; telif korumalı içeriklerin izinsiz kopyalarına
-> veya erişim kısıtlarını aşan kaynaklara yönelik eklentiler eklenmemelidir.
+ 
+## Getting started with writing your first plugin
 
-## CloudStream'e ekleme
+This template includes 1 example plugin.
 
-Derleme başarılı olduktan sonra CloudStream → Ayarlar → Eklentiler → Depo ekle bölümüne şu adresi gir:
+1. Open the root build.gradle.kts, read the comments and replace all the placeholders
+2. Familiarize yourself with the project structure. Most files are commented
+3. Build or deploy your first plugin using:
+   - Windows: `.\gradlew.bat ExampleProvider:make` or `.\gradlew.bat ExampleProvider:deployWithAdb`
+   - Linux & Mac: `./gradlew ExampleProvider:make` or `./gradlew ExampleProvider:deployWithAdb`
 
-```text
-https://raw.githubusercontent.com/hunhax44/hunhax-tv/builds/repo.json
-```
 
-## Geliştirme
+## Granting All Files Access on Newer Android Devices
 
-Bu depo, CloudStream'in resmi eklenti Gradle altyapısı ile kullanılmalıdır.
-Henüz eklenti modülü ve Gradle Wrapper (`gradlew`) eklenmediği için GitHub Actions
-iş akışı şu anda gerçek bir eklenti derleyemez. Önce resmi eklenti şablonunu depoya
-dahil et ve `ExampleProvider` gibi örnek modülü koru veya kendi modülünü ekle.
+For local plugin testing, you need to grant the app "All Files Access" on newer Android devices (Android 11 and above). Here’s how to do it:
 
-Yerel derleme komutu:
+### Using ADB
 
-```bash
-./gradlew make makePluginsJson
-```
+* `adb shell appops set --uid PACKAGE_NAME MANAGE_EXTERNAL_STORAGE allow`
+* Replace `PACKAGE_NAME` with the name of the package for the Cloudstream3 version you are using:
+   - debug: `com.lagradost.cloudstream3.prerelease.debug`
+   - prerelease: `com.lagradost.cloudstream3.prerelease`
+   - stable: `com.lagradost.cloudstream3`
 
-Windows:
+### Manually
 
-```powershell
-.\gradlew.bat make makePluginsJson
-```
+1. **Open Settings**: Go to your device’s Settings menu.
 
-## Otomatik yayınlama
+2. **Navigate to Special Access**:
+   - Tap on "Apps & notifications" or "Apps".
+   - Select "Special app access" or "Special access".
 
-`.github/workflows/build.yml`:
-- `main` dalına push yapıldığında veya Actions ekranından elle çalıştırıldığında tetiklenir.
-- JDK 17 ve Android SDK kurar.
-- CloudStream eklentilerini derler ve `plugins.json` üretir.
-- `.cs3` paketlerini, `plugins.json` ve `repo.json` dosyalarını `builds` dalına yayınlar.
+3. **Select All Files Access**:
+   - Tap on "All files access".
+   - It may be under the three vertical dots menu towards the top of the screen.
 
-`builds` dalı otomatik üretilir; elle düzenleme.
+4. **Grant Access to the App**: Find the app in the list and tap on it to toggle it, if it is not already enabled.
 
-## Kaynaklar
+6. **Restart the App**: Close and reopen the app to apply the changes.
 
-- [CloudStream geliştirici belgeleri](https://recloudstream.github.io/csdocs/devs/gettingstarted/)
-- [Kendi JSON deponu oluşturma](https://recloudstream.github.io/csdocs/devs/create-your-own-json-repository/)
-- [Resmî eklenti şablonu](https://github.com/recloudstream/TestPlugins)
 
-## Lisans
+## License
 
-Bu başlangıç dosyaları MIT lisansı altında sunulur. Eklentilere ve üçüncü taraf kaynaklara ait lisanslar ayrıca geçerlidir.
+Everything in this repo is released into the public domain. You may use it however you want with no conditions whatsoever
+
+
+## Attribution
+
+This template as well as the gradle plugin and the whole plugin system is **heavily** based on [Aliucord](https://github.com/Aliucord).
+*Go use it, it's a great mobile discord client mod!*
